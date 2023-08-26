@@ -12,6 +12,7 @@ int x_excut(char *substance, stack_t **stack, unsigned int idx, FILE *file)
 	instruction_t funcopt[] = {
 		{"push", pushx},
 		{"pall", pall_s},
+		{"pint", op_pint},
 		{NULL, NULL}
 	};
 

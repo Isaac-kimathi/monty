@@ -58,5 +58,7 @@ void nd_add(stack_t **head, int n);
 void pall_s(stack_t **head, unsigned int idx);
 void queue_add(stack_t **head, int n);
 void free_dlnk_lst(stack_t *head);
+ssize_t x_gtline(char **nm, size_t *n, FILE *fd);
+void op_pint(stack_t **stack, unsigned int idx);
 
 #endif

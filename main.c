@@ -10,34 +10,31 @@
  */
 int main(int argc, char *argv[])
 {
+	char *substance = NULL;
 	FILE *file;
 	unsigned int idx = 0;
 	stack_t *stack = NULL;
-	size_t sub_sz = 1024;
-	char *substance = (char *)malloc(sub_sz);
+	size_t sz = 0, ln_rd = 1;
 
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
-		return EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
 	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		return EXIT_FAILURE;
+		exit(EXIT_FAILURE);
 	}
-
-	if (!substance)
+	while (ln_rd > 0)
 	{
-		fprintf(stderr, "Error: Memory allocation failed\n");
-		fclose(file);
-		return EXIT_FAILURE;
-	}
-
-	while (fgets(substance, sub_sz, file) != NULL)
-	{
-		x_excut(substance, &stack, idx, file);
+		ln_rd = x_gtline(&substance, &sz, file);
+		substance++;
+		if (ln_rd > 0)
+		{
+			x_excut(substance, &stack, idx, file);
+		}
 		free(substance);
 	}
 	free_dlnk_lst(stack);
