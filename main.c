@@ -14,11 +14,11 @@ int main(int argc, char *argv[])
 	FILE *file;
 	unsigned int idx = 0;
 	stack_t *stack = NULL;
-	size_t sz = 0, ln_rd = 1;
+	size_t sz = 0;
 
 	if (argc != 2)
 	{
-		fprintf(stderr, "USAGE: monty file\n");
+		fprintf(stderr, "USAGE: %s file\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
@@ -27,17 +27,16 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while (ln_rd > 0)
+	for (; x_gtline(&substance, &sz, file) != -1; substance++)
 	{
-		ln_rd = x_gtline(&substance, &sz, file);
-		substance++;
-		if (ln_rd > 0)
+		if (substance[strlen(substance) - 1] == '\n')
 		{
-			x_excut(substance, &stack, idx, file);
+			substance[strlen(substance) - 1] = '\0';
 		}
-		free(substance);
+		x_excut(substance, &stack, idx, file);
 	}
-	free_dlnk_lst(stack);
+
+	free(substance);
 	fclose(file);
 
 	return(0);

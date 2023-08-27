@@ -36,24 +36,9 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-/**
- * struct fix_s - struct for variables - arg, file, substance
- * @av: value of argument
- * @file: pointer to monty file
- * @subs: content of line in file
- * @rt: flag change stack to queue and vice versa
- * Description: carrier of values throught the program
- */
-typedef struct fix_s
-{
-	FILE *file;
-	char *av;
-	int rt;
-	char *subs;
-} fix_t;
-extern fix_t fx;
-int x_excut(char *substance, stack_t **stack, unsigned int idx, FILE *file);
-void pushx(stack_t **head, unsigned int idx);
+
+void x_excut(char *substance, stack_t **stack, unsigned int idx, FILE *file);
+void pushx(stack_t **stack, unsigned int idx);
 void nd_add(stack_t **head, int n);
 void pall_s(stack_t **head, unsigned int idx);
 void queue_add(stack_t **head, int n);
