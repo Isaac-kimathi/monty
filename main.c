@@ -2,17 +2,19 @@
 #include <stdlib.h>
 #include "monint.h"
 
+int cndt = 0;
+
 /**
  * main - monty code interpreter
  * @argc: argument number
  * @argv: file location of monty file
- * Return: 0 (Success)
+ * Return: nothing
  */
 int main(int argc, char *argv[])
 {
-	char *substance = NULL;
+	char *substance = NULL, *bptr = NULL;
 	FILE *file;
-	unsigned int idx = 0;
+	unsigned int idx = 1;
 	stack_t *stack = NULL;
 	size_t sz = 0;
 
@@ -27,17 +29,27 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	for (; x_gtline(&substance, &sz, file) != -1; substance++)
+	while ((x_gtline(&bptr, &sz, file)) != (-1))
 	{
-		if (substance[strlen(substance) - 1] == '\n')
+		if (cndt)
+			break;
+		if (*bptr == '\n')
 		{
-			substance[strlen(substance) - 1] = '\0';
+			idx++;
+			continue;
 		}
-		x_excut(substance, &stack, idx, file);
+		substance = strtok(bptr, " \t\n");
+		if (!substance || *substance == '#')
+		{
+			idx++;
+			continue;
+		}
+		opcode(&stack, substance, idx);
+		idx++;
 	}
 
-	free(substance);
+	free(bptr);
+	free_dlnk_lst(stack);
 	fclose(file);
-
-	return(0);
+	exit(EXIT_SUCCESS);
 }

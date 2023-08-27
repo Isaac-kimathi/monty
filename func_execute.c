@@ -7,7 +7,7 @@
  * @content: line content
  * Return: void
  */
-void x_excut(char *substance, stack_t **stack, unsigned int idx, FILE *file)
+void opcode(stack_t **stack, char *substance, unsigned int idx)
 {
 	instruction_t funcopt[] = {
 		{"push", pushx},
@@ -17,21 +17,22 @@ void x_excut(char *substance, stack_t **stack, unsigned int idx, FILE *file)
 	};
 
 	unsigned int x = 0;
-	char *opc;
 
-	opc = strtok(substance, " \t\n");
-	if (opc && opc[0] == '#') { 
-		; }
-	for (; funcopt[x].opcode && opc; x++)
+	if (!strcmp(substance, "stack"))
+		return;
+
+	if (!strcmp(substance, "queue"))
+		return;
+
+	while (funcopt[x].opcode)
 	{
-		if(strcmp(opc, funcopt[x].opcode) == 0)
+		if(strcmp(funcopt[x].opcode, substance) == 0)
+		{
 			funcopt[x].f(stack, idx);
+			return;
+		}
+		x++;
 	}
-	if (opc && funcopt[x].opcode == NULL)
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", idx, opc);
-		fclose(file);
-		free(substance);
-		exit(EXIT_FAILURE);
-	}
+	fprintf(stderr, "L%d: unknown instruction %s\n", idx, substance);
+	exit(EXIT_FAILURE);
 }

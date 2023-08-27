@@ -37,7 +37,7 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-void x_excut(char *substance, stack_t **stack, unsigned int idx, FILE *file);
+void opcode(stack_t **stack, char *substance, unsigned int idx);
 void pushx(stack_t **stack, unsigned int idx);
 void nd_add(stack_t **head, int n);
 void pall_s(stack_t **head, unsigned int idx);
