@@ -45,5 +45,19 @@ void queue_add(stack_t **head, int n);
 void free_dlnk_lst(stack_t *head);
 ssize_t x_gtline(char **nm, size_t *n, FILE *fd);
 void op_pint(stack_t **stack, unsigned int idx);
+void op_pop(stack_t **stack, unsigned int idx);
+void x_swap(stack_t **stack, unsigned int idx);
+void op_add(stack_t **stack, unsigned int idx);
+void op_nop(stack_t **stack, unsigned int idx);
+void sub_op(stack_t **stack, unsigned int idx);
+void stack_op(stack_t **stack, unsigned int idx);
+void op_div(stack_t **stack, unsigned int idx);
+void _mul(stack_t **stack, unsigned int idx);
+void op_mod(stack_t **stack, unsigned int idx);
+void op_pchar(stack_t **stack, unsigned int idx);
+void op_pstr(stack_t **stack, unsigned int idx);
+void rotr_op(stack_t **stack, unsigned int idx);
+void rotl_op(stack_t **stack, unsigned int idx);
+
 
 #endif

@@ -13,6 +13,19 @@ void opcode(stack_t **stack, char *substance, unsigned int idx)
 		{"push", pushx},
 		{"pall", pall_s},
 		{"pint", op_pint},
+		{"pop", op_pop},
+		{"swap", x_swap},
+		{"add", op_add},
+		{"nop", op_nop},
+		{"sub", sub_op},
+		{"div", op_div},
+		{"mul", _mul},
+		{"mod", op_mod},
+		{"pchar", op_pchar},
+		{"pstr", op_pstr},
+		{"rotl", rotl_op},
+		{"rotr", rotr_op },
+		{"stack", stack_op},
 		{NULL, NULL}
 	};
 
